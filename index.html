@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billionaire Diary</title>
+
+<style>
+</style>
+
+</head>
+
+<body class="container">
+
+<header>
+</header>
+
+<main id="case">
+<h1>Loading...</h1>
+</main>
+
+<footer>
+</footer>
+
+<script>
+function det(data) {
+document.getElementById("case").innerHTML = "<h1>Loading...</h1>";
+
+fetch('https://forbes400.onrender.com/api/forbes400/')
+      .then(response => response.json())
+      .then(json => spec(json[data-1]));
+function spec(data) {
+
+document.getElementById("case").innerHTML = `
+<a href="index.html"><button type="button">Back</button></a>
+<h2>Position: ${data.rank} </h2><h2>Name: ${data.person.name} </h2><h4>Country: ${data.countryOfCitizenship} </h4><h4>City: ${data.city} </h4><h4>Industry: ${data.industries} </h4><h4>Company: ${data.source} </h4>
+`;
+}
+}
+fetch('https://forbes400.onrender.com/api/forbes400?limit=10')
+      .then(response => response.json())
+      .then(json => dD(json));
+function sa() {
+document.getElementById("case").innerHTML = "<h1>Loading...</h1>";
+fetch('https://forbes400.onrender.com/api/forbes400/')
+      .then(response => response.json())
+      .then(json => daD(json));
+function daD(data) {
+var txt = "";
+for (x of data) {
+
+txt += "<p style='display:inline;'>" + x.rank + ".  Name: " + x.person.name + ".   Citizenship:  " + x.countryOfCitizenship + "</p>" + ".   " + "<button type='button' onclick='det("+x.rank+")'>Details</button><br><br>";
+}
+
+document.getElementById("case").innerHTML = txt;
+
+}
+}
+
+function dD(data) {
+
+var txt = "";
+for (x of data) {
+
+txt += "<p style='display:inline;'>" + x.rank + ".  Name: " + x.person.name + ".   Citizenship:  " + x.countryOfCitizenship + "</p>" + ".   " + "<button type='button' onclick='det("+x.rank+")'>Details</button><br><br>";
+}
+txt += `<button id="sa" type='button' onclick='sa()' class=''>Show All</button>`;
+document.getElementById("case").innerHTML = txt;
+
+
+}
+</script>
+
+</body>
+
+</html>
