@@ -17,6 +17,8 @@
 <body class="container">
 
 <header>
+<h4>Billionaire Diary</h4>
+<input type="text" id="search" placeholder="search by industry"><button type="button" onclick="search()">Search</button><br><br>
 </header>
 
 <main id="case">
@@ -27,6 +29,24 @@
 </footer>
 
 <script>
+function search() {
+
+document.getElementById("case").innerHTML = "<h1>Loading...</h1>";
+fetch(`https://forbes400.onrender.com/api/forbes400/industries/${document.getElementById("search").value}`)
+      .then(response => response.json())
+      .then(json => daD(json));
+function daD(data) {
+var txt = "";
+for (x of data) {
+
+txt += "<p style='display:inline;'>" + x.rank + ".  Name: " + x.person.name + ".   Citizenship:  " + x.countryOfCitizenship + "</p>" + ".   " + "<button type='button' onclick='det("+x.rank+")'>Details</button><br><br>";
+}
+
+document.getElementById("case").innerHTML = txt;
+
+}
+
+}
 function det(data) {
 document.getElementById("case").innerHTML = "<h1>Loading...</h1>";
 
